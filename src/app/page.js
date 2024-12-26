@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Button, Tab, Tabs, Box, Typography, Grid, IconButton, TextField, Switch } from '@mui/material';
+import { Button, Tab, Tabs, Box, Typography, Grid, IconButton, TextField, Switch, Snackbar } from '@mui/material';
 import { Settings } from '@mui/icons-material';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function HomePage() {
   const [clicks, setClicks] = useState(0);
@@ -19,9 +20,10 @@ export default function HomePage() {
   const [clickEffects, setClickEffects] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
   const [mute, setMute] = useState(false);
-  const [gameSpeed, setGameSpeed] = useState(1); // Setting for adjusting game speed
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true); // Setting for notifications
-  const [autoSave, setAutoSave] = useState(true); // Setting for automatic saving
+  const [gameSpeed, setGameSpeed] = useState(1); 
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [autoSave, setAutoSave] = useState(true);
+  const [notification, setNotification] = useState('');
 
   const handleClick = (e) => {
     setClicks((prev) => prev + multiplier * clickPower);
@@ -47,6 +49,7 @@ export default function HomePage() {
     if (clicks >= 50) {
       setClicks((prev) => prev - 50);
       setMultiplier((prev) => prev + 1);
+      if (notificationsEnabled) setNotification('Bought Multiplier! Cost: 50 Pops');
     }
   };
 
@@ -54,6 +57,7 @@ export default function HomePage() {
     if (clicks >= 100) {
       setClicks((prev) => prev - 100);
       setAutoClickers((prev) => prev + 1);
+      if (notificationsEnabled) setNotification('Bought Auto-Poper! Cost: 100 Pops');
     }
   };
 
@@ -61,6 +65,7 @@ export default function HomePage() {
     if (clicks >= 500) {
       setClicks((prev) => prev - 500);
       setFactories((prev) => prev + 1);
+      if (notificationsEnabled) setNotification('Bought Pop-Factory! Cost: 500 Pops');
     }
   };
 
@@ -68,6 +73,7 @@ export default function HomePage() {
     if (clicks >= 2000) {
       setClicks((prev) => prev - 2000);
       setPopcatLabs((prev) => prev + 1);
+      if (notificationsEnabled) setNotification('Bought Popcat Lab! Cost: 2000 Pops');
     }
   };
 
@@ -75,6 +81,7 @@ export default function HomePage() {
     if (clicks >= 250) {
       setClicks((prev) => prev - 250);
       setClickPower((prev) => prev + 1);
+      if (notificationsEnabled) setNotification('Bought Click Power! Cost: 250 Pops');
     }
   };
 
@@ -82,6 +89,7 @@ export default function HomePage() {
     if (clicks >= 1000) {
       setClicks((prev) => prev - 1000);
       setSpeedUpgrade((prev) => prev + 1);
+      if (notificationsEnabled) setNotification('Bought Speed Upgrade! Cost: 1000 Pops');
     }
   };
 
@@ -89,6 +97,7 @@ export default function HomePage() {
     if (clicks >= 1500) {
       setClicks((prev) => prev - 1500);
       setLuckyClicks((prev) => prev + 1);
+      if (notificationsEnabled) setNotification('Bought Lucky Clicks! Cost: 1500 Pops');
     }
   };
 
@@ -96,6 +105,7 @@ export default function HomePage() {
     if (clicks >= 3000) {
       setClicks((prev) => prev - 3000);
       setEventCooldown((prev) => prev - 1000);
+      if (notificationsEnabled) setNotification('Bought Event Cooldown! Cost: 3000 Pops');
     }
   };
 
@@ -115,6 +125,8 @@ export default function HomePage() {
       const stormInterval = setInterval(() => setClicks((prev) => prev + 10), 500);
       setTimeout(() => clearInterval(stormInterval), 5000);
     }
+
+    if (notificationsEnabled) setNotification(`Event Triggered: ${eventName}`);
   };
 
   const toggleSettings = () => setSettings((prev) => !prev);
@@ -136,7 +148,7 @@ export default function HomePage() {
       autoSave,
     };
     localStorage.setItem('popcatStats', JSON.stringify(stats));
-    alert('Settings saved!');
+    if (notificationsEnabled) setNotification('Settings Saved!');
   };
 
   const loadStats = () => {
@@ -156,16 +168,16 @@ export default function HomePage() {
       setGameSpeed(stats.gameSpeed);
       setNotificationsEnabled(stats.notificationsEnabled);
       setAutoSave(stats.autoSave);
-      alert('Settings loaded!');
+      if (notificationsEnabled) setNotification('Settings Loaded!');
     } else {
-      alert('No saved settings found.');
+      if (notificationsEnabled) setNotification('No saved settings found.');
     }
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
       setClicks((prev) => prev + autoClickers + factories * 5 + popcatLabs * 20);
-    }, 1000 / gameSpeed); // Adjust game speed based on the setting
+    }, 1000 / gameSpeed); 
     return () => clearInterval(interval);
   }, [autoClickers, factories, popcatLabs, gameSpeed]);
 
@@ -174,7 +186,6 @@ export default function HomePage() {
       <section>
         <h1 className="text-5xl font-extrabold mb-8">Popcat Clicker</h1>
 
-        {/* Popcat Image Area */}
         <div
           className="relative w-60 h-60 cursor-pointer"
           onClick={handleClick}
@@ -185,12 +196,10 @@ export default function HomePage() {
             className="w-full h-full rounded-full shadow-lg hover:shadow-2xl transform transition duration-300 ease-in-out"
           />
         </div>
-        {/* Display Clicks under the image */}
         <Typography variant="h4" className="mt-4 text-white">{clicks} Pops</Typography>
       </section>
 
       <section>
-        {/* Tabs for Upgrades and Stats */}
         <Tabs value={tabIndex} onChange={handleTabChange} centered className="mt-8">
           <Tab label="Upgrades" className="text-white" />
           <Tab label="Stats" className="text-white" />
@@ -259,7 +268,6 @@ export default function HomePage() {
 
           {tabIndex === 1 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
-              {/* Stats Section */}
               <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
                 <Typography variant="h6" className="text-white">Pops</Typography>
                 <Typography variant="h4" className="text-green-400">{clicks}</Typography>
@@ -288,7 +296,6 @@ export default function HomePage() {
           )}
         </Box>
 
-        {/* Settings Toggle */}
         <div className="mt-6 text-center">
           <IconButton
             onClick={toggleSettings}
@@ -332,6 +339,36 @@ export default function HomePage() {
           )}
         </div>
       </section>
+
+      <Snackbar
+        open={notification !== ''}
+        autoHideDuration={3000}
+        onClose={() => setNotification('')}
+        message={notification}
+        action={
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={() => setNotification('')}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        }
+        sx={{
+          '& .MuiSnackbarContent-root': {
+            backgroundColor: '#1f2937',
+            color: '#fff',
+            borderRadius: '8px',
+            fontSize: '1rem',
+            padding: '10px 20px',
+          },
+          '& .MuiSnackbarContent-action': {
+            color: '#fff',
+          },
+        }}
+      />
+
     </main>
   );
 }
