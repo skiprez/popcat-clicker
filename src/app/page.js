@@ -24,6 +24,19 @@ export default function HomePage() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [autoSave, setAutoSave] = useState(true);
   const [notification, setNotification] = useState('');
+  const baseMultiplierCost = 50;  // Base cost for the first multiplier upgrade
+  const multiplierIncrement = 1.5; // The multiplier for the next level (progressively more expensive)
+  const baseAutoClickerCost = 100;  // Base cost for the first auto-clicker
+  const autoClickerIncrement = 1.6;  // Progressively higher cost
+  const baseFactoryCost = 500;  // Base cost for factories
+  const factoryIncrement = 1.7;  // Progressively higher cost
+  const basePopcatLabCost = 2000;  // Base cost for Popcat Labs
+  const popcatLabIncrement = 1.8;  // Progressively higher cost
+
+  const getMultiplierCost = () => Math.floor(baseMultiplierCost * Math.pow(multiplierIncrement, multiplier - 1));
+  const getAutoClickerCost = () => Math.floor(baseAutoClickerCost * Math.pow(autoClickerIncrement, autoClickers));
+  const getFactoryCost = () => Math.floor(baseFactoryCost * Math.pow(factoryIncrement, factories));
+  const getPopcatLabCost = () => Math.floor(basePopcatLabCost * Math.pow(popcatLabIncrement, popcatLabs));
 
   const handleClick = (e) => {
     setClicks((prev) => prev + multiplier * clickPower);
@@ -46,32 +59,36 @@ export default function HomePage() {
   };
 
   const buyMultiplier = () => {
-    if (clicks >= 50) {
-      setClicks((prev) => prev - 50);
+    const cost = getMultiplierCost();
+    if (clicks >= cost) {
+      setClicks((prev) => prev - cost);
       setMultiplier((prev) => prev + 1);
       if (notificationsEnabled) setNotification('Bought Multiplier! Cost: 50 Pops');
     }
   };
 
   const buyAutoClicker = () => {
-    if (clicks >= 100) {
-      setClicks((prev) => prev - 100);
+    const cost = getAutoClickerCost();
+    if (clicks >= cost) {
+      setClicks((prev) => prev - cost);
       setAutoClickers((prev) => prev + 1);
       if (notificationsEnabled) setNotification('Bought Auto-Poper! Cost: 100 Pops');
     }
   };
 
   const buyFactory = () => {
-    if (clicks >= 500) {
-      setClicks((prev) => prev - 500);
+    const cost = getFactoryCost();
+    if (clicks >= cost) {
+      setClicks((prev) => prev - cost);
       setFactories((prev) => prev + 1);
       if (notificationsEnabled) setNotification('Bought Pop-Factory! Cost: 500 Pops');
     }
   };
 
   const buyPopcatLab = () => {
-    if (clicks >= 2000) {
-      setClicks((prev) => prev - 2000);
+    const cost = getPopcatLabCost();
+    if (clicks >= cost) {
+      setClicks((prev) => prev - cost);
       setPopcatLabs((prev) => prev + 1);
       if (notificationsEnabled) setNotification('Bought Popcat Lab! Cost: 2000 Pops');
     }
@@ -208,56 +225,56 @@ export default function HomePage() {
         <Box sx={{ width: '100%' }} className="mt-8">
           {tabIndex === 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
-              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+              <div className="bg-gray-800 p-8 rounded-xl shadow-xl hover:shadow-2xl">
                 <Typography variant="h6" className="text-green-500">Upgrade Multiplier</Typography>
-                <Typography variant="body2" className="text-white">Cost: 50 Pops</Typography>
+                <Typography variant="body2" className="text-white">Cost: {getMultiplierCost()}</Typography>
                 <Button
                   variant="contained"
                   color="success"
                   onClick={buyMultiplier}
-                  disabled={clicks < 50}
+                  disabled={clicks < getMultiplierCost()}
                   className="mt-4 w-full"
                 >
                   Buy Multiplier
                 </Button>
               </div>
 
-              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+              <div className="bg-gray-800 p-8 rounded-xl shadow-xl hover:shadow-2xl">
                 <Typography variant="h6" className="text-yellow-500">Buy Auto-Poper</Typography>
-                <Typography variant="body2" className="text-white">Cost: 100 Pops</Typography>
+                <Typography variant="body2" className="text-white">Cost: {getAutoClickerCost()}</Typography>
                 <Button
                   variant="contained"
                   color="warning"
                   onClick={buyAutoClicker}
-                  disabled={clicks < 100}
+                  disabled={clicks < getAutoClickerCost()}
                   className="mt-4 w-full"
                 >
                   Buy Auto-Poper
                 </Button>
               </div>
 
-              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+              <div className="bg-gray-800 p-8 rounded-xl shadow-xl hover:shadow-2xl">
                 <Typography variant="h6" className="text-orange-500">Buy Pop-Factory</Typography>
-                <Typography variant="body2" className="text-white">Cost: 500 Pops</Typography>
+                <Typography variant="body2" className="text-white">Cost: {getFactoryCost()}</Typography>
                 <Button
                   variant="contained"
                   color="error"
                   onClick={buyFactory}
-                  disabled={clicks < 500}
+                  disabled={clicks < getFactoryCost()}
                   className="mt-4 w-full"
                 >
                   Buy Pop-Factory
                 </Button>
               </div>
 
-              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+              <div className="bg-gray-800 p-8 rounded-xl shadow-xl hover:shadow-2xl">
                 <Typography variant="h6" className="text-red-500">Buy Popcat Lab</Typography>
-                <Typography variant="body2" className="text-white">Cost: 2000 Pops</Typography>
+                <Typography variant="body2" className="text-white">Cost: {getPopcatLabCost()}</Typography>
                 <Button
                   variant="contained"
                   color="primary"
                   onClick={buyPopcatLab}
-                  disabled={clicks < 2000}
+                  disabled={clicks < getPopcatLabCost()}
                   className="mt-4 w-full"
                 >
                   Buy Popcat Lab
@@ -268,27 +285,27 @@ export default function HomePage() {
 
           {tabIndex === 1 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
-              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+              <div className="bg-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl">
                 <Typography variant="h6" className="text-white">Pops</Typography>
                 <Typography variant="h4" className="text-green-400">{clicks}</Typography>
               </div>
 
-              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+              <div className="bg-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl">
                 <Typography variant="h6" className="text-white">Multiplier</Typography>
                 <Typography variant="h4" className="text-blue-400">x{multiplier}</Typography>
               </div>
 
-              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+              <div className="bg-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl">
                 <Typography variant="h6" className="text-white">Auto-Popers</Typography>
                 <Typography variant="h4" className="text-yellow-400">{autoClickers}</Typography>
               </div>
 
-              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+              <div className="bg-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl">
                 <Typography variant="h6" className="text-white">Pop-Factories</Typography>
                 <Typography variant="h4" className="text-orange-400">{factories}</Typography>
               </div>
 
-              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+              <div className="bg-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl">
                 <Typography variant="h6" className="text-white">Popcat Labs</Typography>
                 <Typography variant="h4" className="text-red-400">{popcatLabs}</Typography>
               </div>

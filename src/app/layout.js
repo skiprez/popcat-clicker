@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Clicker Game",
-  description: "Clicker Game",
+  title: "Popcat Clicker Game",
+  description: "Popcat Clicker Game Created by skiprez",
 };
 
 export default function RootLayout({ children }) {
