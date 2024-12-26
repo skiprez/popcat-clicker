@@ -201,7 +201,7 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
               <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
                 <Typography variant="h6" className="text-green-500">Upgrade Multiplier</Typography>
-                <Typography variant="body2" color="textSecondary">Cost: 50 Pops</Typography>
+                <Typography variant="body2" className="text-white">Cost: 50 Pops</Typography>
                 <Button
                   variant="contained"
                   color="success"
@@ -215,7 +215,7 @@ export default function HomePage() {
 
               <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
                 <Typography variant="h6" className="text-yellow-500">Buy Auto-Poper</Typography>
-                <Typography variant="body2" color="textSecondary">Cost: 100 Pops</Typography>
+                <Typography variant="body2" className="text-white">Cost: 100 Pops</Typography>
                 <Button
                   variant="contained"
                   color="warning"
@@ -229,7 +229,7 @@ export default function HomePage() {
 
               <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
                 <Typography variant="h6" className="text-orange-500">Buy Pop-Factory</Typography>
-                <Typography variant="body2" color="textSecondary">Cost: 500 Pops</Typography>
+                <Typography variant="body2" className="text-white">Cost: 500 Pops</Typography>
                 <Button
                   variant="contained"
                   color="error"
@@ -243,7 +243,7 @@ export default function HomePage() {
 
               <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
                 <Typography variant="h6" className="text-red-500">Buy Popcat Lab</Typography>
-                <Typography variant="body2" color="textSecondary">Cost: 2000 Pops</Typography>
+                <Typography variant="body2" className="text-white">Cost: 2000 Pops</Typography>
                 <Button
                   variant="contained"
                   color="primary"
