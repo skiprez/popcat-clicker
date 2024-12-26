@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Button, Tab, Tabs, Box, Card, CardContent, Typography, Grid, IconButton, TextField, Switch } from '@mui/material';
+import { Button, Tab, Tabs, Box, Typography, Grid, IconButton, TextField, Switch } from '@mui/material';
 import { Settings } from '@mui/icons-material';
 
 export default function HomePage() {
@@ -199,109 +199,91 @@ export default function HomePage() {
         <Box sx={{ width: '100%' }} className="mt-8">
           {tabIndex === 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
-              <Card className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
-                <CardContent>
-                  <Typography variant="h6" className="text-green-500">Upgrade Multiplier</Typography>
-                  <Typography variant="body2" color="textSecondary" className="text-white">Cost: 50 Pops</Typography>
-                  <Button
-                    variant="contained"
-                    color="success"
-                    onClick={buyMultiplier}
-                    disabled={clicks < 50}
-                    className="mt-4 w-full"
-                  >
-                    Buy Multiplier
-                  </Button>
-                </CardContent>
-              </Card>
+              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+                <Typography variant="h6" className="text-green-500">Upgrade Multiplier</Typography>
+                <Typography variant="body2" color="textSecondary" className="text-white">Cost: 50 Pops</Typography>
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={buyMultiplier}
+                  disabled={clicks < 50}
+                  className="mt-4 w-full"
+                >
+                  Buy Multiplier
+                </Button>
+              </div>
 
-              <Card className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
-                <CardContent>
-                  <Typography variant="h6" className="text-yellow-500">Buy Auto-Poper</Typography>
-                  <Typography variant="body2" color="textSecondary" className="text-white">Cost: 100 Pops</Typography>
-                  <Button
-                    variant="contained"
-                    color="warning"
-                    onClick={buyAutoClicker}
-                    disabled={clicks < 100}
-                    className="mt-4 w-full"
-                  >
-                    Buy Auto-Poper
-                  </Button>
-                </CardContent>
-              </Card>
+              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+                <Typography variant="h6" className="text-yellow-500">Buy Auto-Poper</Typography>
+                <Typography variant="body2" color="textSecondary" className="text-white">Cost: 100 Pops</Typography>
+                <Button
+                  variant="contained"
+                  color="warning"
+                  onClick={buyAutoClicker}
+                  disabled={clicks < 100}
+                  className="mt-4 w-full"
+                >
+                  Buy Auto-Poper
+                </Button>
+              </div>
 
-              <Card className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
-                <CardContent>
-                  <Typography variant="h6" className="text-orange-500">Buy Pop-Factory</Typography>
-                  <Typography variant="body2" color="textSecondary" className="text-white">Cost: 500 Pops</Typography>
-                  <Button
-                    variant="contained"
-                    color="error"
-                    onClick={buyFactory}
-                    disabled={clicks < 500}
-                    className="mt-4 w-full"
-                  >
-                    Buy Pop-Factory
-                  </Button>
-                </CardContent>
-              </Card>
+              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+                <Typography variant="h6" className="text-orange-500">Buy Pop-Factory</Typography>
+                <Typography variant="body2" color="textSecondary" className="text-white">Cost: 500 Pops</Typography>
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={buyFactory}
+                  disabled={clicks < 500}
+                  className="mt-4 w-full"
+                >
+                  Buy Pop-Factory
+                </Button>
+              </div>
 
-              <Card className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
-                <CardContent>
-                  <Typography variant="h6" className="text-red-500">Buy Popcat Lab</Typography>
-                  <Typography variant="body2" color="textSecondary" className="text-white">Cost: 2000 Pops</Typography>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={buyPopcatLab}
-                    disabled={clicks < 2000}
-                    className="mt-4 w-full"
-                  >
-                    Buy Popcat Lab
-                  </Button>
-                </CardContent>
-              </Card>
+              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+                <Typography variant="h6" className="text-red-500">Buy Popcat Lab</Typography>
+                <Typography variant="body2" color="textSecondary" className="text-white">Cost: 2000 Pops</Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={buyPopcatLab}
+                  disabled={clicks < 2000}
+                  className="mt-4 w-full"
+                >
+                  Buy Popcat Lab
+                </Button>
+              </div>
             </div>
           )}
 
           {tabIndex === 1 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
               {/* Stats Section */}
-              <Card className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
-                <CardContent>
-                  <Typography variant="h6" className="text-white">Pops</Typography>
-                  <Typography variant="h4" className="text-green-400">{clicks}</Typography>
-                </CardContent>
-              </Card>
+              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+                <Typography variant="h6" className="text-white">Pops</Typography>
+                <Typography variant="h4" className="text-green-400">{clicks}</Typography>
+              </div>
 
-              <Card className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
-                <CardContent>
-                  <Typography variant="h6" className="text-white">Multiplier</Typography>
-                  <Typography variant="h4" className="text-blue-400">x{multiplier}</Typography>
-                </CardContent>
-              </Card>
+              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+                <Typography variant="h6" className="text-white">Multiplier</Typography>
+                <Typography variant="h4" className="text-blue-400">x{multiplier}</Typography>
+              </div>
 
-              <Card className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
-                <CardContent>
-                  <Typography variant="h6" className="text-white">Auto-Popers</Typography>
-                  <Typography variant="h4" className="text-yellow-400">{autoClickers}</Typography>
-                </CardContent>
-              </Card>
+              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+                <Typography variant="h6" className="text-white">Auto-Popers</Typography>
+                <Typography variant="h4" className="text-yellow-400">{autoClickers}</Typography>
+              </div>
 
-              <Card className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
-                <CardContent>
-                  <Typography variant="h6" className="text-white">Pop-Factories</Typography>
-                  <Typography variant="h4" className="text-orange-400">{factories}</Typography>
-                </CardContent>
-              </Card>
+              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+                <Typography variant="h6" className="text-white">Pop-Factories</Typography>
+                <Typography variant="h4" className="text-orange-400">{factories}</Typography>
+              </div>
 
-              <Card className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
-                <CardContent>
-                  <Typography variant="h6" className="text-white">Popcat Labs</Typography>
-                  <Typography variant="h4" className="text-red-400">{popcatLabs}</Typography>
-                </CardContent>
-              </Card>
+              <div className="bg-gray-800 p-4 rounded-xl shadow-xl hover:shadow-2xl">
+                <Typography variant="h6" className="text-white">Popcat Labs</Typography>
+                <Typography variant="h4" className="text-red-400">{popcatLabs}</Typography>
+              </div>
             </div>
           )}
         </Box>
@@ -327,16 +309,7 @@ export default function HomePage() {
                 <Switch
                   checked={mute}
                   onChange={() => setMute((prev) => !prev)}
-                  color="primary"
-                />
-              </div>
-              <div className="mt-4 flex gap-4 items-center">
-                <Typography variant="body1" className="text-white">Game Speed</Typography>
-                <TextField
-                  type="number"
-                  value={gameSpeed}
-                  onChange={(e) => setGameSpeed(Math.max(1, parseFloat(e.target.value)))}
-                  className="w-20"
+                  className="text-white"
                 />
               </div>
               <div className="mt-4 flex gap-4 items-center">
@@ -344,15 +317,15 @@ export default function HomePage() {
                 <Switch
                   checked={notificationsEnabled}
                   onChange={() => setNotificationsEnabled((prev) => !prev)}
-                  color="primary"
+                  className="text-white"
                 />
               </div>
               <div className="mt-4 flex gap-4 items-center">
-                <Typography variant="body1" className="text-white">Enable Auto Save</Typography>
+                <Typography variant="body1" className="text-white">Auto-Save</Typography>
                 <Switch
                   checked={autoSave}
                   onChange={() => setAutoSave((prev) => !prev)}
-                  color="primary"
+                  className="text-white"
                 />
               </div>
             </div>
